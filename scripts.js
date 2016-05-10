@@ -25,7 +25,6 @@ $.fn.serializeObject = function() {
   return o;
 };
 
-
 // Backbone Collections
 var Ideas = Backbone.Collection.extend({
     url: '/ideas'
@@ -44,7 +43,7 @@ var IdeaList = Backbone.View.extend({
     var allIdeas =  new Ideas();
     allIdeas.fetch({
       success: function (allIdeas) {
-        var template = _.template($('#idea-list-template').html(), {allIdeas: allIdeas.models})
+        var template = _.template($('#idea-list-template').html(), {allIdeas: allIdeas.models});
         that.$el.html(template);
         $('.edit-idea-form').toggle();
       }
