@@ -1,10 +1,14 @@
+// Cross-site scripting prevent
 function htmlEncode(value){
   return $('<div/>').text(value).html();
 }
+
+// Set API domain
 $.ajaxPrefilter( function (options, originalOptions, xhr) {
-  options.url = "http://localhost:3000/api/v1" + options.url;
+  options.url = "http://edgars-ideabox.herokuapp.com/api/v1" + options.url;
 });
 
+// Serialize Object
 $.fn.serializeObject = function() {
   var o = {};
   var a = this.serializeArray();
@@ -20,7 +24,6 @@ $.fn.serializeObject = function() {
   });
   return o;
 };
-
 
 // Backbone Collections
 var Ideas = Backbone.Collection.extend({
@@ -40,17 +43,17 @@ var IdeaList = Backbone.View.extend({
     var allIdeas =  new Ideas();
     allIdeas.fetch({
       success: function (allIdeas) {
-        var template = _.template($('#idea-list-template').html(), {allIdeas: allIdeas.models})
+        var template = _.template($('#idea-list-template').html(), {allIdeas: allIdeas.models});
         that.$el.html(template);
         $('.edit-idea-form').toggle();
       }
-    })
+    });
   },
   events: {
     'click .delete-idea': 'deleteIdea'
   },
   deleteIdea: function (ev) {
-    var id = ev.target.id
+    var id = ev.target.id;
     var idea = new Idea({id: id});
     var allIdeas =  new Ideas();
     var $idea = $('#' + id).closest('tr');
@@ -71,12 +74,12 @@ var EditIdea = Backbone.View.extend({
       var idea = new Idea({id: options.id});
       idea.fetch({
         success: function (idea) {
-          var template = _.template($('#edit-idea-template').html(), {idea: idea})
+          var template = _.template($('#edit-idea-template').html(), {idea: idea});
           that.$el.html(template);
         }
       });
     } else {
-      var template = _.template($('#edit-idea-template').html(), {idea: null})
+      var template = _.template($('#edit-idea-template').html(), {idea: null});
       this.$el.html(template);
     }
   },
@@ -90,7 +93,7 @@ var EditIdea = Backbone.View.extend({
       success: function () {
         router.navigate('', {trigger: true});
       }
-    })
+    });
     return false;
   }
 });
