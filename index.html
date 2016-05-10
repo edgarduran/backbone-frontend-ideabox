@@ -61,7 +61,9 @@
       <table>
         <thead>
           <tr>
-            <th>Title:</th>
+            <th class="right">Action</th>
+            <th>:</th>
+            <th class="center">Title:</th>
             <th>Idea:</th>
             <th>Quality:</th>
             <th></th>
@@ -70,6 +72,8 @@
         <tbody>
           <% _.each(allIdeas, function(idea){ %>
             <tr>
+              <td><a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">thumb_up</i></a></td>
+              <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">thumb_down</i></a></td>
               <td><%= htmlEncode(idea.get('title')) %></td>
               <td><%= htmlEncode(idea.get('body')) %></td>
               <td><%= htmlEncode(idea.get('quality')) %></td>
