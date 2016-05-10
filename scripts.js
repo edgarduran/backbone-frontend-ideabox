@@ -5,7 +5,7 @@ function htmlEncode(value){
 
 // Set API domain
 $.ajaxPrefilter( function (options, originalOptions, xhr) {
-  options.url = "http://localhost:3000/api/v1" + options.url;
+  options.url = "http://edgars-ideabox.herokuapp.com/api/v1" + options.url;
 });
 
 // Serialize Object
