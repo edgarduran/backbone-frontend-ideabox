@@ -5,15 +5,23 @@
     <title>IdeaBox Backbone Front End</title>
     <link type="text/css" rel="stylesheet" href="style.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <body background="http://215marketinghouse.com/wp-content/uploads/2015/05/Simple-Grey-Background.jpg">
   </head>
   <body>
+    <nav>
+      <div class="nav-wrapper red accent-4">
+        <a href="#!" class="brand-logo">Idea Box</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="sass.html"><i class="material-icons left">search</i></a></li>
+        </ul>
+      </div>
+    </nav>
     <!-- ======================== -->
     <!-- HTML UnderScore Templates-->
     <!-- ======================== -->
     <div class="container">
-      <h2>Idea Box</h2>
-      <hr />
-      <h3>Add Idea</h3>
+      <h3 class="center">Save all of your mediocre ideas!!</h3>
+      <h5>Add Idea</h5>
       <a href="#/new" class="btn-floating btn-large waves-effect waves-light red" id="create-idea" value="Create Idea"><i class="material-icons">add</i></a>
       <hr />
       <div class="edit-form"></div>
@@ -23,17 +31,30 @@
     <script type="text/template" id="edit-idea-template">
       <form class="edit-idea-form">
         <% if (idea) { %>
-          <h3>Update Idea</h3>
+          <h4>Update Idea</h4>
         <% } %>
-        <label>Title</label>
-        <input type="text" name="title" value="<%= idea ? idea.get('title') : '' %>">
-        <label>Idea</label>
-        <input type="text" name="body" value="<%= idea ? idea.get('body') : '' %>">
-        <button type="submit" class"large waves-effect waves-light green"><%= idea ? 'Update' : 'Create' %></button>
-        <% if(idea) { %>
-          <input type="hidden" name="id" value="<%= idea.id %>"/>
-        <% }; %>
-      </form>
+        <div class="container">
+          <div class="row">
+            <form class="col s12 offset-s1">
+              <div class="row">
+                <div class="input-field col s6">
+                  <label>Title</label><br>
+                  <input class="form-control" id="idea-title" type="text" length="15" class="validate" name="title" value="<%= idea ? idea.get('title') : '' %>">
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <label>Idea</label><br>
+                  <input id="idea-body" class="materialize-textarea" length="100" type="text" name="body" value="<%= idea ? idea.get('body') : '' %>">
+                  <button type="submit" class"large waves-effect waves-light green"><%= idea ? 'Update' : 'Create' %></button>
+                  <% if(idea) { %>
+                    <input type="hidden" name="id" value="<%= idea.id %>"/>
+                  <% }; %>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
     </script>
 
     <script type="text/template" id="idea-list-template">
