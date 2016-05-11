@@ -90,12 +90,26 @@ var IdeaList = Backbone.View.extend({
     return false;
   },
   downgradeIdea: function (ev) {
+    var that = this;
     var id = ev.target.id;
     var idea = new Idea({id: id});
     var allIdeas =  new Ideas();
     var $quality = $('#' + id).closest('tr').find('#quality').text();
     var $idea = $('#' + id).closest('tr');
-    console.log($quality);
+    if ($quality === "genius") {
+      var newQuality = "plausible";
+    } else if ($quality === "plausible") {
+      var newQuality = "swill";
+    } else {
+      var newQuality = "swill";
+    }
+    idea.save({quality: newQuality}, {
+      success: function () {
+        setTimeout(function () {
+          that.render();
+        }, 15);
+      }
+    });
     return false;
   }
 });
