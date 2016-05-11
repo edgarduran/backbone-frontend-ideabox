@@ -38,7 +38,7 @@ var Idea = Backbone.Model.extend({
 // Backbone Views
 var IdeaList = Backbone.View.extend({
   el: '.ideas',
-  render: function () {
+  render: function (options) {
     var that = this;
     var allIdeas =  new Ideas();
     allIdeas.fetch({
@@ -50,7 +50,9 @@ var IdeaList = Backbone.View.extend({
     });
   },
   events: {
-    'click .delete-idea': 'deleteIdea'
+    'click .delete-idea': 'deleteIdea',
+    'click .thumb-up': 'upgradeIdea',
+    'click .thumb-down': 'downgradeIdea'
   },
   deleteIdea: function (ev) {
     var id = ev.target.id;
@@ -62,6 +64,38 @@ var IdeaList = Backbone.View.extend({
         $idea.remove();
       }
     });
+    return false;
+  },
+  upgradeIdea: function (ev) {
+    var that = this;
+    var id = ev.target.id;
+    var idea = new Idea({id: id});
+    var allIdeas =  new Ideas();
+    var $idea = $('#' + id).closest('tr');
+    var $quality = $('#' + id).closest('tr').find('#quality').text();
+    if ($quality === "swill") {
+      var newQuality = "plausible";
+    } else if ($quality === "plausible") {
+      var newQuality = "genius";
+    } else {
+      var newQuality = "genius";
+    }
+    idea.save({quality: newQuality}, {
+      success: function () {
+        setTimeout(function () {
+          that.render();
+        }, 15);
+      }
+    });
+    return false;
+  },
+  downgradeIdea: function (ev) {
+    var id = ev.target.id;
+    var idea = new Idea({id: id});
+    var allIdeas =  new Ideas();
+    var $quality = $('#' + id).closest('tr').find('#quality').text();
+    var $idea = $('#' + id).closest('tr');
+    console.log($quality);
     return false;
   }
 });

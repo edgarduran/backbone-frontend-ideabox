@@ -72,11 +72,11 @@
         <tbody>
           <% _.each(allIdeas, function(idea){ %>
             <tr>
-              <td><a class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">thumb_up</i></a></td>
-              <td><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">thumb_down</i></a></td>
+              <td><a class="btn-floating btn-large waves-effect waves-light blue thumb-up"><i id="<%= idea.id %>" class="material-icons">thumb_up</i></a></td>
+              <td><a class="btn-floating btn-large waves-effect waves-light red thumb-down"><i id="<%= idea.id %>" class="material-icons">thumb_down</i></a></td>
               <td><%= htmlEncode(idea.get('title')) %></td>
               <td><%= htmlEncode(idea.get('body')) %></td>
-              <td><%= htmlEncode(idea.get('quality')) %></td>
+              <td id="quality"><%= htmlEncode(idea.get('quality')) %></td>
               <td><a href="#/edit/<%= idea.id %>" class="btn blue" id="edit-idea">Edit</a></td>
               <td><a class="waves-effect waves-light btn red delete-idea" id="<%= idea.id %>">Delete</a></td>
             </tr>
